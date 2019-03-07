@@ -140,7 +140,12 @@ Ext.define('Study.view.main.Main', {
     					iconCls : 'x-fa fa-laptop',
     					page : 'serverMonitor',
     					lead : true
-    				}]
+    				},{
+    					text : '자가진단표',
+    					iconCls: 'x-fa fa-laptop',
+    					page : 'selfTest',
+    					leaf : true
+    				}] 
     			}
     			
     		}
