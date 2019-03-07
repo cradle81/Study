@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- Mapper.java namespace -->
+<mapper namespace="kr.or.tta.jungwon.BMTMapper">
+<!-- Person.java namespace -->
+    <resultMap type="kr.or.tta.jungwon.vo.BMTUser" id="BMTUser">
+    	<!--
+        <id column="id" property="id"  />
+        <result property="NAME" column="name"/>   
+        -->
+    </resultMap>
+    
+    <resultMap type="kr.or.tta.jungwon.vo.Machine" id="Machine">
+    </resultMap>
+    
+    <resultMap type="kr.or.tta.jungwon.vo.ScheduleJobVO" id="ScheduleJobVO">
+    </resultMap>
+    
+    <select id="selectAllMahcines" resultMap="Machine">
+        SELECT * FROM tb_machine 
+    </select>   
+    
+    <select id="selectTypeMachines" parameterType="hashmap" resultMap="Machine" >
+        SELECT * FROM tb_machine where  cpu_type in 
+         <foreach item="item" index="index" collection="machinelist" open="(" close=")" separator=",">
+   				#{item}
+  		</foreach>
+    </select>       
+    
+    <select id="selectOneMachine" resultMap="Machine">
+        SELECT * FROM tb_machine 
+        where svrname = #{svrname}
+    </select>                   
+    <select id="selectAllBMTUser" resultMap="BMTUser"> 
+        SELECT * FROM tb_bmtuser 
+    </select>
+    
+    <select id="selectAllNameNameEmail" resultMap="BMTUser">
+    	select name,email from tb_bmtuser
+    </select>
+    
+	<select id="selectBMTUser" resultMap="BMTUser">
+        SELECT * FROM tb_bmtuser
+        where id=#{id}
+    </select>   
+    
+    <select id="selectAllScheduleJob" resultMap="ScheduleJobVO">
+    	select * from tb_schedulejob    	
+    </select>
+	<insert id="insertScheduleJob" parameterType="kr.or.tta.jungwon.vo.ScheduleJobVO">
+	  insert into tb_schedulejob
+	  values (#{threadName},#{fromDate},#{endDate},#{instName},#{keyword},#{searchType},#{users})
+	</insert>    
+	<delete id="deleteScheduleJob" parameterType="String">
+		delete from tb_schedulejob where threadName=#{threadName}
+	</delete>
+	
+</mapper>
