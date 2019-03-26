@@ -1,13 +1,41 @@
-Ext.define('Study.view.selfTest.selfTest', {
+Ext.define('Study.view.selfTest.result.selfTestResultTable', {
 	extend: 'Ext.panel.Panel',	
-	xtype : 'selfTest',
-	title : '교육체게 자가진단표',	
+	xtype : 'selfTestResultTable',
+	title : '교육체게 자가진단결과표',	
     controller: 'selfTestController',
 
     width: 650,
+    
+    layout: {
+        type: 'hbox',
+        pack: 'start',
+        align: 'stretch'
+    },
+   
+    bodyPadding: 10,
 
+    defaults: {
+        frame: true,
+        bodyPadding: 10
+    },
+    
+    items: [
+            {
+                title: '역량 진단 결과',
+                flex:1,
+                margin: '0 10 0 0',
+                /*html: 'flex: 1'*/
+                xtype : 'selfTestResultRaderChart'                	     
+            },
+            { 
+                title: '성향 분석 결과',
+                flex:1,
+                margin: '0 10 0 0',
+                xtype : 'selfTestResultPieChart'
+            }
+        ]    
 
-    items: [{
+/*    items: [{
         xtype: 'polar',
         reference: 'chart',
         width: '100%',
@@ -82,6 +110,6 @@ Ext.define('Study.view.selfTest.selfTest', {
                 fillStyle: 'yellow'
             }
         }]
-    }]
+    }]*/
 
 });

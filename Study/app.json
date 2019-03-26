@@ -67,7 +67,8 @@
      */
     "requires": [ 
         "font-awesome",
-        "sencha-charts"
+        "ext-charts",
+        "charts"
     ],
 
     /**

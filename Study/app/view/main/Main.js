@@ -142,11 +142,28 @@ Ext.define('Study.view.main.Main', {
     					lead : true
     				},{
     					text : '자가진단표',
-    					iconCls: 'x-fa fa-laptop',
-    					page : 'selfTest',
-    					leaf : true
+    					iconCls: 'x-fa fa-pie-chart',
+    					children : [{
+    						text : '자가진단질문',
+    						page : 'selfTestQuestion',
+    						iconCls : 'x-fa fa-question', 
+    						leaf : true    							    							
+    					},{
+    						text : '결과확인',
+    						iconCls : 'x-fa fa-list-alt',
+    						page : 'selfTestResultTable',
+    						leaf : true
+    							
+    					},{
+    						text : '관리',
+    						iconCls : 'x-fa fa-calendar',
+    						page : 'selfTestManagement',
+    						leaf : true
+    							
+    					}],
+    					expanded : true
     				}] 
-    			}
+    			} 
     			
     		}
     	}]

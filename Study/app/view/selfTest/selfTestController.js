@@ -27,15 +27,20 @@ Ext.define('Study.view.selfTest.selfTestController', {
         // ourselves except appending a '%' sign, but at the same time
         // don't want to loose the formatting done by the native renderer,
         // we let the native renderer process the value first.
-        return layoutContext.renderer(label) + '%';
+        return layoutContext.renderer(label) + '점';
     },
-
-/*    onMultiAxisLabelRender: function (axis, label, layoutContext) {
-        return label === 'Jan' ? '' : label;
+ 
+    onMultiAxisLabelRender: function (axis, label, layoutContext) {
+        return label == 'TTA 직무역량' ? '' : label; 
     },
     onSeriesLabelRender: function (tooltip, record, item) {
-        tooltip.setHtml(record.get('month') + ': ' + record.get(item.field) + '%');
+        tooltip.setHtml(record.get('name') + ': ' + record.get(item.field) + '점');
+    },
+    onSeriesTooltipRender: function (tooltip, record, item) {
+        tooltip.setHtml(record.get('category') + ': ' + record.get('score') + '점');
     }
-*/
+    
+    
+
     
 })
