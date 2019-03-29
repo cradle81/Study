@@ -117,6 +117,8 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
 	      },
 	       items : [{
 	    	    xtype : 'grid',
+	    	    multiSelect: true,
+	    	    
 	    	    height : 250,
 	    	    split : {
 	  	    	  size : 1,
@@ -127,7 +129,8 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
 		       	columnLines: true,
 		        flex: 3,
 		       	viewConfig : {
-		       		emptyText : '데이터가 없습니다.'    		
+		       		emptyText : '데이터가 없습니다.',
+		       		enableTextSelection: true
 		       	},    	
 		       	tbar: [{
 		   	    		xtype : 'button',
