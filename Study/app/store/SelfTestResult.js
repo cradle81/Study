@@ -15,7 +15,7 @@ Ext.define('Study.store.SelfTestResult', {
 	       {name : '사업도메인 역량', pr: 68, rc: 87, ft: 100},
 	       {name : '팀/센터 직무역량', pr: 38, rc: 88, ft: 100},
 	       {name : 'SW연구소 직무역량', pr: 59, rc: 80, ft: 100},
-	       {name : 'TTA 직무역량',  pr: 38, rc: 77, ft: 100},            
+	       {name : 'TTA 직무역량',  pr: 38, rc: 77, ft: 100}         
 
         ];
 

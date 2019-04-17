@@ -17,6 +17,18 @@
     <resultMap type="kr.or.tta.jungwon.vo.ScheduleJobVO" id="ScheduleJobVO">
     </resultMap>
     
+   <!-- self test -->
+       <resultMap type="kr.or.tta.jungwon.vo.STQuestionVO" id="STQuestionVO">
+    </resultMap>
+    
+    <select id="selectAllSTQuestions" resultMap="STQuestionVO">
+        SELECT * FROM tb_st_question order by qno ASC
+    </select>     
+    
+    <select id="selectOneSTQuestion" resultMap="STQuestionVO">
+    	SELECT * FROM tb_st_question where qno=#{qno}
+    </select>         
+    
     <select id="selectAllMahcines" resultMap="Machine">
         SELECT * FROM tb_machine 
     </select>   
