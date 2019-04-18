@@ -38,9 +38,7 @@ Ext.define('Study.view.selfTest.selfTestController', {
     },
     onSeriesTooltipRender: function (tooltip, record, item) {
         tooltip.setHtml(record.get('category') + ': ' + record.get('score') + '점');
+        
     }
-    
-    
 
-    
 })
