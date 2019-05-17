@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -44,6 +45,8 @@ public class SelfTestController {
 	@Autowired
     SelfTestService  selfTestService; 
 	
+	
+	//
 	@RequestMapping(value = "getSTQuestion.do", method = RequestMethod.POST)
 	public JSONObject getSTQuestions(@RequestParam(required = false) Map param, Locale locale)
 	{
@@ -58,7 +61,6 @@ public class SelfTestController {
 		for (STQuestionVO question : stquestions)
 		{			
 	    	JSONObject item = new JSONObject();
-
 	    	
 	    	item.put("qno", question.getQno());
 	    	item.put("question", question.getQuestion());
@@ -71,6 +73,13 @@ public class SelfTestController {
 					
 		return resObj;
 	}	
+	//http://localhost:8080/tta/bidinfo/selftest/getSTQuestion.do
+	@RequestMapping(value = "sendForm.do", method = RequestMethod.POST)
+	public void submitSTFrom(@RequestBody Map<String, Object> params, Locale locale)
+	{
 	
+		logger.info(params.toString()); 
+	}		
+	 
 	
 }

@@ -15,9 +15,9 @@ Ext.define('Study.view.selfTest.question.selfTestQuestion', {
 		        {
 		            title: '현재정보 입력',
 		            xtype : 'STQuestions'
-		        },		        {
-		            title: '현재정보 입력2',
-		            xtype : 'selfTestQuestionCurrent'		      
+		        },{
+		            title: '기술직무역량',
+		            xtype: 'TDQuestions'		        	
 		        },
 		        {
 		            title: 'TTA 직무 역량',
@@ -27,6 +27,8 @@ Ext.define('Study.view.selfTest.question.selfTestQuestion', {
 		            title: 'SW 연구소 직무 역량',
 		            html: '<H1> SW 연구소 직무 역량 </H1>'
 		        }
+		        
+		        
 		    ]		
 
 		
