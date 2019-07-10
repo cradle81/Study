@@ -83,11 +83,9 @@ Ext.define('Study.view.selfTest.question.STQuestions', {
 			            	item.boxLabel=answerlist[i].answer
 			            	item.name=answerlist[i].answerNo    	            	
 			            	items.push(item);    	            	
-			            } 
-			            widget.add(items) 
+			            } 			             
+			            widget.add(items);
 			        }  
-				 }]  
-			
+				 }]  		
     }]
-
 });

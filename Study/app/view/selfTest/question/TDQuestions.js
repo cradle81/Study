@@ -14,6 +14,7 @@ Ext.define('Study.view.selfTest.question.TDQuestions', {
     items : [{
     	xtype : 'grid',
     	title : '기술도메인 전문성측정',
+    	//maxWidth : 1000,
     	columnLines : true,
     	store :{
     		autoLoad: true,
@@ -21,19 +22,31 @@ Ext.define('Study.view.selfTest.question.TDQuestions', {
     		data   : { items: [{
 		    			qno:'Q1', 
 		    			question: '당신은 대학교 재학 시 컴퓨터 공학 관련 수업을 어느정도 수준으로 수강을 하였나요?', 
-		    			answers :[{answer : '전혀듣지않았다', answerNo: 'Q1_1', name:'Q1_1'},{
-			    				answer : '기초개론정도', answerNo: 'Q1_2', name:'Q1_2'
+		    			answers :[{answer : '전혀듣지않았다', answerNo: '1', name:'Q1_1'},{
+			    				answer : '기초개론정도', answerNo: '2', name:'Q1_2'
 				    			},{
-				    				answer : '2+시스템구조', answerNo: 'Q1_3', name:'Q1_3'
+				    				answer : '기초개론+시스템구조', answerNo: '3', name:'Q1_3'
 				    			},{
-				    				answer : '3+프로그래밍고급', answerNo: 'Q1_4', name:'Q1_4'
+				    				answer : '기초개론+시스템구조+프로그래밍고급', answerNo: '4', name:'Q1_4'
 				    			},{
-				    				answer : '모든정공', answerNo: 'Q1_5', name:'Q1_5'	
+				    				answer : '모두 전공함', answerNo: '5', name:'Q1_5'	
+				    			}]
+	    				},{
+		    			qno:'Q2', 
+		    			question: '당신은 리눅스 운영체제를 운영하는데 있어 어느정도 수준입니까?', 
+		    			answers :[{answer : '전혀 모른다.', answerNo: '1', name:'Q2_1'},{
+			    				answer : ' 리눅스를 설치하여 사용해 본적이 있다', answerNo: '2', name:'Q2_2'
+				    			},{
+				    				answer : '시험에 필요한  패키지를 필요 시 설치 및 빌드하여 사용 할 수 있다.', answerNo: '3', name:'Q2_3'
+				    			},{
+				    				answer : '시험에 필요한 관련 설정 및 구성을 충분히 시간내에 요구사항에 맞게끔 구성 할 수 있다.(메일서버, 스토리지 구성, 10G 스위치 설정 등등)', answerNo: '4', name:'Q2_4'
+				    			},{
+				    				answer : '리눅스 운영체제는 시험에 운영하는데 전혀 문제가 되지 않는다', answerNo: '5', name:'Q2_5'	
 				    			}]
 	    				}]    			
     		},
     		 proxy: {
-		         type: 'memory',
+		         type: 'memory', 
 		         reader: {
 	             type: 'json',
 	             rootProperty: 'items'
@@ -47,14 +60,15 @@ Ext.define('Study.view.selfTest.question.TDQuestions', {
     	columns : [{
     		xtype : 'rownumberer'
     	},{
-    		text : '질문번호',
+    		text : '번호',
     		flex : 1,
     		dataIndex: 'qno'
     	},{
-    		text : '질문내용',
-    		flex : 3,
+    		text : '질문',
+    		flex : 4,
     		dataIndex: 'question' ,
-			renderer : function (value, metaData, record, rowIndex, colIndex, store, view) {
+    		cellWrap : true
+		/*	renderer : function (value, metaData, record, rowIndex, colIndex, store, view) {
 			    var q  = record.get('question')
 			    var grid = this
 			    var i ;
@@ -63,8 +77,36 @@ Ext.define('Study.view.selfTest.question.TDQuestions', {
 			    	q=insert(q,'<br/>',((i+1)*crsize))  	
 			    }
 			    return q;
-			}    		
+			}    	*/	
     	},{
+			text : '답변',
+    		flex : 3 ,
+    		xtype : 'widgetcolumn',
+    		headerWrap : true,
+    		cellWrap : true,
+    		widget : {
+				 xtype: 'radiogroup',
+	             vertical: true,    
+	             labelWidth: 100,
+	             labelStyle: 'width:30%',
+	             columns: 1   	                         
+    		},
+         	onWidgetAttach: function(col, widget, rec){
+			    	var answerlist=rec.get('answers')
+			    	var items=[] 
+		            //widget.add(rec.get('answer2'))
+		            var i ; 
+		            for (i=0;i<answerlist.length;i++){  	            	
+		            	var item=new Object()		            	
+		            	item.boxLabel=answerlist[i].answerNo + ') ' +answerlist[i].answer
+		            	//item.name= answerlist[i].name   	            			            	
+		            	item.name= rec.get('qno');
+		            	item.inputValue= answerlist[i].name;
+		            	items.push(item);    	            	
+		            } 			             
+		            widget.add(items); 
+         	}    		
+    	}/*,{
     		text : '모른다 <------>매우잘한다',
 			flex : 2,
 			xtype : 'widgetcolumn',
@@ -80,7 +122,7 @@ Ext.define('Study.view.selfTest.question.TDQuestions', {
 			onWidgetAttach: function(col, widget, rec){
 				console.log(widget);
 			}
-    	}]
+    	}*/]
     	
     		
     	

@@ -39,6 +39,45 @@ Ext.define('Study.view.selfTest.selfTestController', {
     onSeriesTooltipRender: function (tooltip, record, item) {
         tooltip.setHtml(record.get('category') + ': ' + record.get('score') + '점');
         
+    },
+    onSaveFormClick: function(btn) {
+    	//checkbox를 찾아보자
+    	var me = this;
+    	var view = me.getView(); 
+    	var grid = view.down('grid');
+    	//var viewModel = view.getViewModel();    	
+    	var checkBoxs = (Ext.ComponentQuery.query('checkboxgroup',grid));
+    	var form = view.getForm();
+    	console.log(form);
+    	if (form.isValid()){
+			Ext.Msg.alert({
+                title: 'Submitted Values',
+                message: 'The following will be sent to the server: <br />' +
+                         form.getValues(true).replace(/&/g,', '),
+                height: 200
+            });
+         
+	      /*  Ext.Ajax.request({
+	        	url : Ext.manifest.api_url+'/tta/bidinfo/selftest/sendForm.do',
+	        	method : 'POST',
+	        	headers : {'Content-Type':'application/json'},
+	        	params : Ext.JSON.encode(form.getValues()),
+	        	success : function(conn,response,options,eOpts){
+	        		Ext.Msg.alert('결과', '성공');
+	        	},
+	        	failure : function(conn,response,options,eOpts){
+	        		Ext.Msg.alert('실패', conn.responseText);
+	        	}
+	        	
+	        	
+	        })*/
+    		
+    	}
+       
+    	
+
+    	
     }
+    
 
 })

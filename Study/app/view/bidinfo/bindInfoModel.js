@@ -10,6 +10,8 @@ function oneMonthAgo(){
 	return date;   
 } 
 
+
+
 Ext.define('Study.view.bindinfo.bidinfoModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.bidinfoList',
@@ -30,6 +32,8 @@ Ext.define('Study.view.bindinfo.bidinfoModel', {
     	}
 	    
     }
+    
+    
 
 
     //TODO - add data, formulas and/or methods to support your view
