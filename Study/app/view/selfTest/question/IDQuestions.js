@@ -1,6 +1,6 @@
-Ext.define('Study.view.selfTest.question.TDQuestions', {
+Ext.define('Study.view.selfTest.question.IDQuestions', {
 	extend: 'Ext.form.Panel',
-	xtype : 'TDQuestions',
+	xtype : 'IDQuestions',
 	scrollable: true,
     controller: 'selfTestController',
     
@@ -15,8 +15,7 @@ Ext.define('Study.view.selfTest.question.TDQuestions', {
     }],
     items : [{
     	xtype : 'grid',
-    	title : '기술도메인 전문성측정',
-    	//maxWidth : 1000,
+    	title : '사업도메인전문성',
     	columnLines : true,
   	
 /*    	store :{

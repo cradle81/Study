@@ -20,7 +20,7 @@ Ext.define('Study.store.BMTUserList', {
 			 type : 'json',
 			 rootProperty : 'data'
 		 }
-	 }
+	 }   
     
 });
    

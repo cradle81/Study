@@ -47,8 +47,13 @@ Ext.define('Study.view.selfTest.selfTestController', {
     	var grid = view.down('grid');
     	//var viewModel = view.getViewModel();    	
     	var checkBoxs = (Ext.ComponentQuery.query('checkboxgroup',grid));
+    	var radioBoxs = (Ext.ComponentQuery.query('checkboxgroup',grid));
     	var form = view.getForm();
-    	console.log(form);
+    	console.log("form",form);
+    	console.log("view",view);
+    	console.log("radioBox",radioBoxs);
+    	console.log("radioBox",radioBoxs[0].getValue());
+    	console.log("getValues()",form.getValues());
     	if (form.isValid()){
 			Ext.Msg.alert({
                 title: 'Submitted Values',

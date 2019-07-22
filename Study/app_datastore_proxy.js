@@ -21,10 +21,10 @@ Ext.onReady(function(){
 						type : 'json',
 						rootProperty : 'data'
 							
-					}
+					} 
 				}
 			}			
-		},{
+		},{ 
 			xtype : 'grid',
 			columns : [{
 				text : '컬럼1',
