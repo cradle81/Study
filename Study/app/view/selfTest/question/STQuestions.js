@@ -59,7 +59,8 @@ Ext.define('Study.view.selfTest.question.STQuestions', {
 					text : '답변',
 					flex : 3,
 					xtype : 'widgetcolumn',
-					
+					headerWrap : true,
+					cellWrap : true,					
 					widget: 
 					{
 						// xtype: 'getXtypeFromServer' 

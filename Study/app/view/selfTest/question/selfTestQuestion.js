@@ -19,19 +19,19 @@ Ext.define('Study.view.selfTest.question.selfTestQuestion', {
 		        },
 		        {
 		            title: '사업도메인전문성(ID)',
-		            html: '<H1> 사업도메인전문성 역량  질문 </H1>'		        	
+		            xtype: 'IDQuestions'		        	
 		        },
 		        {
 		            title: '팀/센터 직무 수행 역량(CTD)',
-		            html: '<H1> 팀/센터 직무 수행 역량  질문 </H1>'
+		            xtype: 'CTDQuestions'
 		        },
 		        {
 		        	title : 'TTA 직무 수행 역량(TTAD)',
-		        	html : '<H1> TTA 직무 수행 역량 질물</H1>'
+		        	xtype: 'TTADQuestions'
 		        },
 		        {
 		            title: 'SW 연구소 직무 수행 역량(SWD)',
-		            html: '<H1> SW 연구소 직무 수행 역량 질문 </H1>'
+		            xtype: 'SWDQuestions'
 		        }		        		       
 		    ]
 });

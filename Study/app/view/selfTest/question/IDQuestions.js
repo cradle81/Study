@@ -27,7 +27,7 @@ Ext.define('Study.view.selfTest.question.IDQuestions', {
 				},
 				url : Ext.manifest.api_url+'/tta/selftest/question.do',
 				extraParams : {
-					code: 'TD'
+					code: 'ID'
 				},
 				reader : {
 					type : 'json',
