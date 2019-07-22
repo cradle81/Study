@@ -35,6 +35,7 @@ import kr.or.tta.jungwon.vo.*;
  * Handles requests for the application home page.
  */
 @RestController 
+@RequestMapping(value = "/bidinfo")
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);

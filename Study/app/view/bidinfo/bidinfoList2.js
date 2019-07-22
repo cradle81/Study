@@ -15,9 +15,8 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
     	resize : 'setGridHeight'
     },
     title : '입찰공고검색',
-    
     items : [{
-    	xtype : 'panel',   /////1 
+    	xtype : 'panel',
         layout: {
             type: 'hbox',
             padding: 5
@@ -53,67 +52,70 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
                 'keypress': 'keyPress'                    	  	     
                     	   
             }	
-    	}]},{
-    	xtype : 'panel',   /////2
-        layout: {
-            type: 'hbox',
-            padding: 5
-        },
-        items : [{
-    		xtype : 'textfield',
-    		name : 'instNm',
-    		anchor : '100%',
-    		fieldLabel: '발주기관',
-    		allowBlank: 'true',
-    		emptyText:'발주기관을 입력하세요',
-    		padding: 5,
-    		bind :{
-    	    	value : '{instNm}'
-    	    },
-    	    enableKeyEvents: true,
-            listeners: {                   
-                'keypress': 'keyPress'                    	  	     
-                    	   
-                    }	                                                   
-            
-    	},{
-    		xtype : 'textfield',
-    		name : 'keyword',
-    		anchor : '100%',
-    		fieldLabel: '키 워 드',
-    		allowBlank: 'true',
-    		emptyText:'키워드를 입력하세요', 
-    		padding: 5,
-    		bind :{
-    	    	value : '{keyword}'
-    	    },
-    	    enableKeyEvents: true,
-            listeners: {                   
-                'keypress': 'keyPress'                    	  	     	                    	   
-                    }	
-    		
-    	}]},{
-		xtype : 'radiogroup',   /////3
-		fieldLabel : '검색유형',
-		reference : 'searchType-ref', 
-		columns : 2,
-		width :  450, 
-		anchor: '100%', 
-		vertical : false,
-	    padding : 5,
-		  items : [
-			  {name : 'searchType', boxLabel: '사전공고(p)', inputValue: 'p', checked: true},
-	          {name : 'searchType', boxLabel: '본공고(t)', inputValue: 't'}
-		  ]},{
-		xtype : 'panel',     /////4
-		border : true,
-		reference : 'panel-ref', 
-		padding: 5,
+    	}]
+        },{
+	    	xtype : 'panel',
+	        layout: {
+	            type: 'hbox',
+	            padding: 5
+	        },
+	        items : [{
+	    		xtype : 'textfield',
+	    		name : 'instNm',
+	    		anchor : '100%',
+	    		fieldLabel: '발주기관',
+	    		allowBlank: 'true',
+	    		emptyText:'발주기관을 입력하세요',
+	    		padding: 5,
+	    		bind :{
+	    	    	value : '{instNm}'
+	    	    },
+	    	    enableKeyEvents: true,
+	            listeners: {                   
+	                'keypress': 'keyPress'                    	  	     
+	                    	   
+	                    }	                                                   
+	            
+	    	},{
+	    		xtype : 'textfield',
+	    		name : 'keyword',
+	    		anchor : '100%',
+	    		fieldLabel: '키 워 드',
+	    		allowBlank: 'true',
+	    		emptyText:'키워드를 입력하세요', 
+	    		padding: 5,
+	    		bind :{
+	    	    	value : '{keyword}'
+	    	    },
+	    	    enableKeyEvents: true,
+	            listeners: {                   
+	                'keypress': 'keyPress'                    	  	     	                    	   
+	                    }	
+	    		
+	    	}]
+      },{
+    	  xtype : 'radiogroup',
+    	  fieldLabel : '검색유형',
+    	  reference : 'searchType-ref', 
+    	  columns : 2,
+    	  width :  450, 
+    	  anchor: '100%', 
+    	  vertical : false,
+    	  padding : 5,
+    	  items : [
+    		  {name : 'searchType', boxLabel: '사전공고(p)', inputValue: 'p', checked: true},
+              {name : 'searchType', boxLabel: '본공고(t)', inputValue: 't'}
+    	  ] 
+      },{
+    	  xtype : 'panel',
+	      border : true,
+	      reference : 'panel-ref', 
+	      padding: 5,
 	     
-	    layout: {
-	          type: 'hbox'
-	    },
-	    items : [{
+	      layout: {
+	            type: 'hbox'
+	      },
+	       items : [{
 	    	    xtype : 'grid',
 	    	    multiSelect: true,
 	    	    
@@ -160,23 +162,32 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
 		           		name : 'detailButton',
 		           		text : '상세확인',
 		           		handler : 'gotoDetail'
-		       		}		       		
-		       	}],
+		       		}
+		       		
+		       	}/*,{				
+		       		text : 'URL',
+		       		flex : 1,
+		       		dataIndex : 'link'
+		       	}*/],
 		       	bind : {
-		       		store : '{bidinfoList}'		       	   
+		       		store : '{bidinfoList}'
+		       	   
 		       	},
+		   /*    	listeners : { 
+		       		cellclick : 'gotoDetail'
+		       	},*/
 		       	bbar :{
 		       		xtype:'pagingtoolbar',
-		       		//plugin : '' 
+		       		//plugin : ''
 		       		displayInfo: true    		
-		       	} 
+		       	}
 	        },{
-	    	    xtype : 'grid',         /////////// 4-2
+	    	    xtype : 'grid',
 		       	title : '검색기록',
 		        reference : 'searchGrid-ref', 
 		       	height : 450,
 		       	flex: 1,
-		       	layout : 'fit' , 
+		       	layout : 'fit',
 		        viewModel : 'searchHistoryViewModel',
 		        selModel: {
 		            type: 'checkboxmodel',
@@ -200,7 +211,7 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
 		       		text : '검색타입',
 		       		flex : 1,
 		       	    dataIndex: 'showType'
-		       	},{
+		       	}/*,{
 		            xtype: 'checkcolumn',
 		            header: '등록',
 		            dataIndex: 'schedule',
@@ -208,11 +219,11 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
 		            editor: {
 		                xtype: 'checkbox',
 		                cls: 'x-grid-checkheader-editor'
-		            } 
-		        }], 
+		            }
+		        }*/], 
 		       	bind : {
 		       		store : '{searchHistoryStore}'		       	   
-		       	}, 
+		       	},
 		       	listeners: {
 		       		cellclick: 'searchHistorycellClick'       		
 		       	},
@@ -231,8 +242,8 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
 		       		},
 		       		handler : 'regMointoringSchedule'
 		       	}]
- 
-	       }]               /////////////// 4-2
-        }] 
+
+	       }] 
+         }]
      
 });

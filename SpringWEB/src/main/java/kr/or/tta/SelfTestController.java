@@ -1,21 +1,16 @@
 package kr.or.tta;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.ibatis.javassist.bytecode.Descriptor.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import kr.or.tta.jungwon.repository.QuestionRepository;
 import kr.or.tta.jungwon.service.BMTUserService;
-
 import kr.or.tta.jungwon.service.SelfTestService;
-import kr.or.tta.jungwon.vo.*;
+import kr.or.tta.jungwon.vo.QuestionVO;
+import kr.or.tta.jungwon.vo.STQuestionVO;
 
 /**
  * Handles requests for the application home page.
@@ -45,9 +40,36 @@ public class SelfTestController {
 	@Autowired
     SelfTestService  selfTestService; 
 	
+	@Autowired
+	QuestionRepository qRepo;
+
+	
+	
+    @Transactional        
+	@RequestMapping(value = "/question.do", method = {RequestMethod.GET, RequestMethod.POST},
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody JSONObject getTDQuestion(@RequestParam(required = false) Map param){
+
+    	 List<QuestionVO> question;
+    	 
+    	 if (param.isEmpty())
+    	 {
+    		 question = qRepo.findAll();		
+    	 }
+    	 else
+    	 {
+    		 String code = (String)param.get("code");
+    		 question = qRepo.findByCode(code);
+    	 }
+
+	    JSONObject resObj = new JSONObject();	
+	    resObj.put("data", question); 
+    	return resObj;
+    }
+	
 	
 	//
-	@RequestMapping(value = "getSTQuestion.do", method = RequestMethod.POST)
+	@RequestMapping(value = "getSTQuestion.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public JSONObject getSTQuestions(@RequestParam(required = false) Map param, Locale locale)
 	{
 
@@ -80,6 +102,5 @@ public class SelfTestController {
 	
 		logger.info(params.toString()); 
 	}		
-	 
 	
 }

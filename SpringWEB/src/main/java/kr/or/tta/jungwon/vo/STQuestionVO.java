@@ -36,5 +36,4 @@ public class STQuestionVO {
 	public void setCode2(String code2) {
 		this.code2 = code2;
 	}
-
 }

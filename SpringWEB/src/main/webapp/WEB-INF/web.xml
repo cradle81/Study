@@ -18,7 +18,8 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>appServlet</servlet-name>
-    <url-pattern>/bidinfo/*</url-pattern>
+    <url-pattern>/*</url-pattern>
+    <!-- url-pattern>/bidinfo/*</url-pattern -->
   </servlet-mapping>
   <filter> 
     <filter-name>CorsFilter</filter-name>
