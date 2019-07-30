@@ -17,7 +17,7 @@ Ext.define('Study.view.selfTest.result.selfTestResultTable', {
     defaults: {
         frame: true,
         bodyPadding: 10
-    },
+    },  
     
     items: [
             {

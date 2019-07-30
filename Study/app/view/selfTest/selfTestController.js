@@ -27,7 +27,8 @@ Ext.define('Study.view.selfTest.selfTestController', {
         // ourselves except appending a '%' sign, but at the same time
         // don't want to loose the formatting done by the native renderer,
         // we let the native renderer process the value first.
-        return layoutContext.renderer(label) + '점';
+        //return layoutContext.renderer(label) + '점';
+        return layoutContext.renderer(label)
     },
  
     onMultiAxisLabelRender: function (axis, label, layoutContext) {

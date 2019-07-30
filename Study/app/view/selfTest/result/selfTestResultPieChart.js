@@ -13,7 +13,7 @@ Ext.define('Study.view.selfTest.result.selfTestResultPieChart', {
         type: 'selfTestResultPieChart'
     },
     legend: {
-        docked: 'bottom'
+        docked: 'right'
     },
     interactions: ['rotate'],
     series: [{

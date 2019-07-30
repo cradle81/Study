@@ -11,11 +11,11 @@ Ext.define('Study.store.SelfTestResult', {
         config.data = [
            			
 			                //present // recomand  // future
-		   {name : '기술도메인  역량', pr: 50, rc: 86, ft: 100},
-	       {name : '사업도메인 역량', pr: 68, rc: 87, ft: 100},
-	       {name : '팀/센터 직무역량', pr: 38, rc: 88, ft: 100},
-	       {name : 'SW연구소 직무역량', pr: 59, rc: 80, ft: 100},
-	       {name : 'TTA 직무역량',  pr: 38, rc: 77, ft: 100}         
+		   {name : '기술도메인  역량', pr: 0, rc: 0, ft: 0},
+	       {name : '사업도메인 역량', pr: 0, rc: 0, ft: 0},
+	       {name : '팀/센터 직무역량', pr: 0, rc: 0, ft: 0},
+	       {name : 'SW연구소 직무역량', pr: 0, rc: 0, ft: 0},
+	       {name : 'TTA 직무역량',  pr: 0, rc: 0, ft: 0}         
 
         ];
 

@@ -18,11 +18,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.or.tta.jungwon.repository.PositionWeightRepository;
 import kr.or.tta.jungwon.repository.QuestionRepository;
+import kr.or.tta.jungwon.repository.RankWeightRepository;
+import kr.or.tta.jungwon.repository.ResultStoreRepository;
+import kr.or.tta.jungwon.repository.WorkTaskWeightRepository;
 import kr.or.tta.jungwon.service.BMTUserService;
 import kr.or.tta.jungwon.service.SelfTestService;
+import kr.or.tta.jungwon.vo.PositionWeightVO;
 import kr.or.tta.jungwon.vo.QuestionVO;
+import kr.or.tta.jungwon.vo.RankWeightVO;
+import kr.or.tta.jungwon.vo.ResultScoreVO;
 import kr.or.tta.jungwon.vo.STQuestionVO;
+import kr.or.tta.jungwon.vo.WorkTaskWeightVO;
 
 /**
  * Handles requests for the application home page.
@@ -42,7 +50,18 @@ public class SelfTestController {
 	
 	@Autowired
 	QuestionRepository qRepo;
+	
+	@Autowired
+	PositionWeightRepository pwRepo;
 
+	@Autowired
+	RankWeightRepository rwRepo;
+	
+	@Autowired
+	WorkTaskWeightRepository wtwRepo;
+	
+	@Autowired
+	ResultStoreRepository rsRepo;	
 	
 	
     @Transactional        
@@ -66,7 +85,74 @@ public class SelfTestController {
 	    resObj.put("data", question); 
     	return resObj;
     }
-	
+    
+    @Transactional        
+	@RequestMapping(value = "/positionWeight.do", method = {RequestMethod.GET, RequestMethod.POST},
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody JSONObject getPositionWeight(@RequestParam(required = false) Map param){
+
+    	 List<PositionWeightVO> pws;
+    	 
+
+    	 pws = pwRepo.findAll();		
+
+
+
+	    JSONObject resObj = new JSONObject();	
+	    resObj.put("data", pws); 
+    	return resObj;
+    }    
+
+    @Transactional        
+	@RequestMapping(value = "/workTaskWeight.do", method = {RequestMethod.GET, RequestMethod.POST},
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody JSONObject getWorkTaskWeight(@RequestParam(required = false) Map param){
+
+    	 List<WorkTaskWeightVO> wtws;
+    	 
+
+    	 wtws = wtwRepo.findAll();		
+
+
+
+	    JSONObject resObj = new JSONObject();	
+	    resObj.put("data", wtws); 
+    	return resObj;
+    }    
+    
+    @Transactional        
+	@RequestMapping(value = "/rankWeight.do", method = {RequestMethod.GET, RequestMethod.POST},
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody JSONObject getRankWeight(@RequestParam(required = false) Map param){
+
+    	 List<RankWeightVO> rws;
+    	 
+
+    	 rws = rwRepo.findAll();		
+
+
+
+	    JSONObject resObj = new JSONObject();	
+	    resObj.put("data", rws); 
+    	return resObj;
+    }    
+
+    @Transactional        
+	@RequestMapping(value = "/resultStoreList.do", method = {RequestMethod.GET, RequestMethod.POST},
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody JSONObject getResultStoreList(@RequestParam(required = false) Map param){
+
+    	 List<ResultScoreVO> rss;
+    	 
+
+    	 rss = rsRepo.findAll();		
+
+
+
+	    JSONObject resObj = new JSONObject();	
+	    resObj.put("data", rss); 
+    	return resObj;
+    }        
 	
 	//
 	@RequestMapping(value = "getSTQuestion.do", method = {RequestMethod.GET, RequestMethod.POST})

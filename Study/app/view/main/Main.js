@@ -133,7 +133,8 @@ Ext.define('Study.view.main.Main', {
     				},{
     					text : '테스트',
     					iconCls: 'x-fa fa-laptop',
-    					page : 'testList',
+						//page : 'testList',
+						page : 'combination-dashboard',
     					leaf : true
     				},{
     					text : '서버모니터',
@@ -156,9 +157,20 @@ Ext.define('Study.view.main.Main', {
     							
     					},{
     						text : '관리',
-    						iconCls : 'x-fa fa-calendar',
-    						page : 'selfTestManagement',
-    						leaf : true
+							iconCls : 'x-fa fa-calendar',
+							expanded : true,
+							children : [{
+								text : '직위 직무 가중표',
+								page : 'RankPositionWeightTable',
+								iconCls : 'x-fa fa-list-alt',
+								leaf : true
+
+							},{
+								text : '결과 점수표',
+								page : 'resultScoreTable',
+								iconCls : 'x-fa fa-list-alt',
+								leaf : true	
+							}]
     							
     					}],
     					expanded : true
