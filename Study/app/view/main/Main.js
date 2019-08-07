@@ -159,7 +159,7 @@ Ext.define('Study.view.main.Main', {
     						text : '관리',
 							iconCls : 'x-fa fa-calendar',
 							expanded : true,
-							children : [{
+							children : [{ 
 								text : '직위 직무 가중표',
 								page : 'RankPositionWeightTable',
 								iconCls : 'x-fa fa-list-alt',
@@ -168,6 +168,11 @@ Ext.define('Study.view.main.Main', {
 							},{
 								text : '결과 점수표',
 								page : 'resultScoreTable',
+								iconCls : 'x-fa fa-list-alt',
+								leaf : true	
+							},{
+								text : '질문지 관리',
+								page : 'questionAnwerTable',
 								iconCls : 'x-fa fa-list-alt',
 								leaf : true	
 							}]

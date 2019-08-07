@@ -208,7 +208,7 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
 		            editor: {
 		                xtype: 'checkbox',
 		                cls: 'x-grid-checkheader-editor'
-		            } 
+		            }
 		        }], 
 		       	bind : {
 		       		store : '{searchHistoryStore}'		       	   

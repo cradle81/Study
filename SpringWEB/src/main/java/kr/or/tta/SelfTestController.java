@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.or.tta.jungwon.repository.AnswerRepository;
 import kr.or.tta.jungwon.repository.PositionWeightRepository;
 import kr.or.tta.jungwon.repository.QuestionRepository;
 import kr.or.tta.jungwon.repository.RankWeightRepository;
@@ -25,6 +26,7 @@ import kr.or.tta.jungwon.repository.ResultStoreRepository;
 import kr.or.tta.jungwon.repository.WorkTaskWeightRepository;
 import kr.or.tta.jungwon.service.BMTUserService;
 import kr.or.tta.jungwon.service.SelfTestService;
+import kr.or.tta.jungwon.vo.AnswerVO;
 import kr.or.tta.jungwon.vo.PositionWeightVO;
 import kr.or.tta.jungwon.vo.QuestionVO;
 import kr.or.tta.jungwon.vo.RankWeightVO;
@@ -52,6 +54,9 @@ public class SelfTestController {
 	QuestionRepository qRepo;
 	
 	@Autowired
+	AnswerRepository aRepo;	
+	
+	@Autowired
 	PositionWeightRepository pwRepo;
 
 	@Autowired
@@ -63,13 +68,36 @@ public class SelfTestController {
 	@Autowired
 	ResultStoreRepository rsRepo;	
 	
+    @Transactional        
+	@RequestMapping(value = "/answers.do", method = {RequestMethod.GET, RequestMethod.POST},
+			produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody JSONObject getAnswers(@RequestParam(required = false) Map param){
+
+    	 List<AnswerVO> answers;
+    	 
+    	 if (param.isEmpty())
+    	 {
+    		 answers = aRepo.findAll();		
+    	 }
+    	 else
+    	 {
+    		 String qkey = (String)param.get("qkey");
+    		 QuestionVO qkeyVO = new QuestionVO(qkey);
+    		 //answers = aRepo.findByQuestion(qkeyVO); 
+    		 answers = aRepo.findByQkey(qkey);
+    	 }
+
+	    JSONObject resObj = new JSONObject();	
+	    resObj.put("data", answers); 
+    	return resObj;
+    }	
 	
     @Transactional        
 	@RequestMapping(value = "/question.do", method = {RequestMethod.GET, RequestMethod.POST},
 			produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody JSONObject getTDQuestion(@RequestParam(required = false) Map param){
 
-    	 List<QuestionVO> question;
+    	 List<QuestionVO> question; 
     	 
     	 if (param.isEmpty())
     	 {

@@ -1,4 +1,4 @@
-Ext.define('Study.view.selfTest.result.ResultScoreTable',{
+Ext.define('Study.view.selfTest.management.ResultScoreTable',{
     extend : 'Ext.panel.Panel',
     xtype : 'resultScoreTable',
     controller : 'selfTestController',

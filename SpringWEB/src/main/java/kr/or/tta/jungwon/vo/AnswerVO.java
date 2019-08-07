@@ -28,12 +28,16 @@ public class AnswerVO {
 	@Column(length=32)
 	private String akey;
 	
-	@ManyToOne 
-	@JoinColumn(name = "qkey")	
+	//ManyToOne 설정 
+	//@ManyToOne 
+	//@JoinColumn(name = "qkey")
+	//private QuestionVO question;
+	
 	//@Column(length=32)
 	//private String qkey;
-	private QuestionVO question;
-	
+	@Column
+	private String qkey;
+	 
 	@Column(length=32) 
 	private String code;
 	
@@ -41,9 +45,9 @@ public class AnswerVO {
 	private String subcode;
 	
 	@Column(length=256)
-	private String answer;
+	private String answer; 
 	
-    @Builder
+ /*   @Builder
     public AnswerVO(String ano, String akey, QuestionVO question, String code, String subcode, String answer) {
         this.ano = ano;
         this.answer = answer;
@@ -51,8 +55,16 @@ public class AnswerVO {
         this.subcode = subcode;
         this.question = question;
         this.akey = akey;
-    }
-    
+    }*/
+	   @Builder
+	    public AnswerVO(String ano, String akey, String qkey, String code, String subcode, String answer) {
+	        this.ano = ano;
+	        this.answer = answer;
+	        this.code = code;
+	        this.subcode = subcode;
+	        this.qkey = qkey; 
+	        this.akey = akey;
+	    }    
     
     
 }

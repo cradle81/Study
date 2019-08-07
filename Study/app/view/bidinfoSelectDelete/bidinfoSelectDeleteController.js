@@ -40,7 +40,7 @@ Ext.define('Study.view.bidinfoSelectDelete.bidinfoSelectDeleteController', {
 				var threadName = record.get('threadName');
 				
 				console.log(threadName);
-				
+				 
 		     	Ext.Ajax.request({ 
 		     		url : Ext.manifest.api_url+'/tta/bidinfo/delSchedule.do',
 			 		method : 'POST',

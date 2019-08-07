@@ -1,4 +1,4 @@
-Ext.define('Study.view.selfTest.result.ResultScoreTableList',{
+Ext.define('Study.view.selfTest.management.ResultScoreTableList',{
     extend : 'Ext.panel.Panel',
     xtype : 'ResultScoreTableList',
     controller : 'selfTestController',
@@ -11,11 +11,14 @@ Ext.define('Study.view.selfTest.result.ResultScoreTableList',{
         frame: true,
         //bodyPadding: 10
     },
+    viewModel: true, 
+
     items :[{
         xtype : 'grid',
         title : '결과리스트',
         flex : 1,
         name : 'resultScoreListGrid',
+        reference : 'resultScoreListGrid-Ref',
         tbar : [{ 
             xtype : 'button', 
             text : '조회',
@@ -25,15 +28,21 @@ Ext.define('Study.view.selfTest.result.ResultScoreTableList',{
                 var store = grid.getStore();
                 store.load();  
             }
+        },{
+            xtype : 'textfield',
+            bind : {
+                value : '{resultScoreListGrid-Ref.selection.name}' 
+            }
         }],
         columns :[{
             text : '이름',
-            flex : 1,
+            flex : 1, 
             dataIndex : 'name'
         },{
             text : '등록시간',
             flex : 1,
-            dataIndex : 'datetime'
+            dataIndex : 'datetime',
+            formatter : 'date("Y/m/d H:m")' 
         },{
             text : 'TTA 직무역량',
             flex : 1,
@@ -135,7 +144,9 @@ Ext.define('Study.view.selfTest.result.ResultScoreTableList',{
         listeners : {
             cellclick: function(grid, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
                // selectionchangese: function(grid, record, eOpts ) {
-            
+                
+                console.log('선택테스트', grid.selection.name);
+
                 var rst = this.up('resultScoreTable');
                 var raderchart = rst.down('selfTestResultRaderChart'); 
                 var piechart = rst.down('selfTestResultPieChart'); 

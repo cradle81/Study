@@ -79,11 +79,58 @@ Ext.define('Study.view.selfTest.selfTestController', {
 	        })*/
     		
     	}
-       
-    	
 
-    	
+    },
+    onSerachQuestionList : function (btn){
+        /* var me = this;
+        var cb = me.lookupReference('qcodeCombobox');
+        console.log(cb);
+        var value = cb.getValue();
+        Ext.Msg.alert('value',value);  */
+
+        var me = this;
+        var view = me.getView();
+        var viewModel = view.getViewModel();
+        //var parma = viewModel.get('qcodeCombobox');  //viewModel를 이용해서 가져오는 경우
+
+        var qcodeCombobox = me.lookupReference('qcodeCombobox'); //vieModel을 사용하면 초기 vlaue값이 null이라서 emptyText가 동작하지 않음
+
+        var param = qcodeCombobox.getValue();
+ 
+        var answerGrid = me.lookupReference('answerListGrid-Ref');
+        var answerStore = answerGrid.getStore();
+        answerStore.removeAll();
+
+        var grid = btn.up('grid'); 
+        var store = grid.getStore();
+        var proxy = store.getProxy()
+        proxy.setExtraParam('code',param)
+        store.load();
+
+    },
+/*     onClickecQuestion : function(grid, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
+        var me = this;
+        var view = me.getView();
+        var viewModel = view.getViewModel();
+        var answerGrid = me.lookupReference('answerListGrid-Ref');        
+        var answerStore = answerGrid.getStore();
+        var answerProxy = answerStore.getProxy();
+        var qkey = record.get('qkey');
+        answerProxy.setExtraParam('qkey',qkey);
+        answerStore.load();
+
     }
-    
-
+  */
+    onClickecQuestion : function(btn ) {
+        var me = this;
+        var view = me.getView();
+        var viewModel = view.getViewModel();
+        var answerGrid = me.lookupReference('answerListGrid-Ref');        
+        var answerStore = answerGrid.getStore();
+        var answerProxy = answerStore.getProxy();
+        var record = btn.getWidgetRecord();
+        var qkey = record.get('qkey');
+        answerProxy.setExtraParam('qkey',qkey);
+        answerStore.load();
+    }
 })

@@ -59,6 +59,10 @@ public class QuestionVO implements Question {
 	@OrderBy("ano")
 	private List<AnswerVO> answers;
 	
+	public QuestionVO(String qkey){
+		this.qkey=qkey;
+	}
+	
     @Builder
     public QuestionVO(String qno, String code, String subcode, double weight, String question, String qkey) {
         this.qno = qno;

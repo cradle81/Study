@@ -4,15 +4,22 @@ Ext.define('Study.view.selfTest.question.selfTestQuestion', {
                'Ext.layout.container.Card'
            ],	
 	xtype : 'selfTestQuestion',
+	activeTab: 0,
 	title : '자기점검질문지',	
 		  defaults: {
 		        bodyPadding: 15
 		    },
 
 		    items:[
+				{
+					// 이상하게 첫번째 탭은 form.getValue가 동작하지 않음
+					title: '안내문구', 
+					html : '<H1> 자가 점검 질문지 입니다.</H1> </br> 그럼 시작합니다. !!!!',
+					hidden: true
+		        },
 		        {
-		            title: '현재정보입력(SD)',
-		            xtype : 'STQuestions'
+		            title: '현재정보입력(CS)', 
+		            xtype : 'INITQeustions'
 		        },{
 		            title: '기술도메인전문성(TD)',
 		            xtype: 'TDQuestions'		        	
