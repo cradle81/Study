@@ -3,13 +3,14 @@ package kr.or.tta.bidinfo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Vector;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,7 +23,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element; 
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +92,7 @@ public class URLConnection {
 		return result;
 	}
 	
-	public  JSONObject getPreStdPublishList(String from, String to, String instNm, String bidNm)
+	public  JSONObject getPreStdPublishList(String from, String to, String instNm, String bidNm, String isExctMatch)
 	{
 		//URL Setting 
 		
@@ -170,8 +171,19 @@ public class URLConnection {
 			    	
 			    	//링크 넣기
 			    	//링크에 등록 번호를 조합해서 넣오 둔다
-			    	item.put("link", "https://www.g2b.go.kr:8143/ep/preparation/prestd/preStdDtl.do?preStdRegNo="+item2);		    	
-			    	jsonArrayRows.add(item);
+			    	item.put("link", "https://www.2b.go.kr:8143/ep/preparation/prestd/preStdDtl.do?preStdRegNo="+item2);
+			    	if(isExctMatch.equals("true"))
+			    	{
+			    		if(item5.equals(instNm))
+			    		{
+			    			jsonArrayRows.add(item);
+			    		}
+			    	}
+			    	else
+			    	{
+			    		jsonArrayRows.add(item);
+			    	}
+			    	
 		    			    	
 			    	}		    	
 			    	resObj.put("data",jsonArrayRows);	
@@ -180,9 +192,40 @@ public class URLConnection {
 		
 	}
 	
-	public JSONObject getTbidListURL(String from, String to, String instNm, String bidNm)
+/*	public JSONObject getTbidListURL(String from, String to, String instNm, String bidNm)
 	{
-		URIBuilder builder=new URIBuilder();		
+		URIBuilder builder=new URIBuilder();	
+		
+		
+		//조회 기간 확인 // 6개월 이상인 경우는 별도로 셋팅해야 함
+		
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate  startDate= LocalDate.parse(from,formatter);
+		LocalDate  endDate= LocalDate.parse(to,formatter);
+			
+			
+		//6개월 이상인지 확인
+		logger.info("startDate = {}",startDate);
+		logger.info("endDate = {}",endDate);
+		long months = ChronoUnit.MONTHS.between(startDate, endDate);
+		long days = ChronoUnit.DAYS.between(startDate, endDate);
+		logger.info("month = {}",months);
+		logger.info("days = {}",days);
+		
+		if (days > 180)
+		{
+			 LocalDate tempDate = startDate;
+			 for(int i=0;i<(months/6);i++)
+			 {
+				 logger.info("{} ~ {}",tempDate,tempDate.plusMonths(6));		
+				 tempDate=startDate.plusMonths(6);
+				 
+			 }
+			 logger.info("{} ~ {}",tempDate,endDate);
+			 
+		}
+		
 		
 		StringBuffer result=new StringBuffer();
 		try {
@@ -214,7 +257,7 @@ public class URLConnection {
 			
 			URI uri=builder.build();		
 			
-			logger.info("URL Builder String =>> {}.", uri);					
+			logger.debug("URL Builder String =>> {}.", uri);					
 			result = excuteURL(uri);		
 		
 		} catch (URISyntaxException e) { 
@@ -242,7 +285,7 @@ public class URLConnection {
 		    	String item5 = row.getElementsByTag("th").get(5).text();		    	
 		    	String item7 = row.getElementsByTag("th").get(7).text();
 		    	
-		    	System.out.printf("%-10s%-50s%-100s\n", item5,item7,item3);
+		    	//System.out.printf("%-10s%-50s%-100s\n", item5,item7,item3);
 	    	}
 	    	
 	    	//만약 내용이 없으면 break;
@@ -270,13 +313,13 @@ public class URLConnection {
 		    	
 		    	
 		    	//System.out.printf("%-20s%-10s%-50s%-100s\n", item1,item5,item7,item3);
-		    	System.out.printf("%-50s%-100s%-20s\n", item7,item3,item5);
+		    	//System.out.printf("%-50s%-100s%-20s\n", item7,item3,item5);
 		    	
 		    	//link row에 에드			    			    	
 		    	item.put("link",row.select("a").attr("href"));
 		    	
 		    	//link 프린트
-		    	System.out.println(row.select("a").attr("href"));
+		    	//System.out.println(row.select("a").attr("href"));
 		    	
 		    	//json 형태		    	
 		    	jsonArrayRows.add(item);	    	
@@ -284,13 +327,152 @@ public class URLConnection {
 	    	resObj.put("data",jsonArrayRows);	    	    	
           }				
 	    return resObj;
+	}*/
+	public JSONObject getTbidListURL(String from, String to, String instNm, String bidNm,String isExtMatch)
+	{
+		URIBuilder builder=new URIBuilder();	
+		
+		
+		//조회 기간 확인 // 6개월 이상인 경우는 별도로 셋팅해야 함
+		
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate  startDate= LocalDate.parse(from,formatter);
+		LocalDate  endDate= LocalDate.parse(to,formatter);
+			
+			
+		//6개월 이상인지 확인
+		logger.info("startDate = {}",startDate);
+		logger.info("endDate = {}",endDate);
+		long months = ChronoUnit.MONTHS.between(startDate, endDate);
+		long days = ChronoUnit.DAYS.between(startDate, endDate);
+		logger.info("month = {}",months);
+		logger.info("days = {}",days);
+		
+		JSONObject resObj = new JSONObject();
+		JSONArray jsonArrayRows = new JSONArray();
+		if (days > 180)
+		{
+			 LocalDate tempDate = startDate;
+			 for(int i=0;i<(months/6);i++)
+			 {
+				 logger.info("{} ~ {}",tempDate,tempDate.plusMonths(6));
+				 jsonArrayRows.addAll(getTbidListURL2(tempDate.format(formatter),(tempDate.plusMonths(6)).format(formatter),instNm,bidNm,isExtMatch));				 		
+				 tempDate=tempDate.plusMonths(6);				 				
+			 }
+			 logger.info("{} ~ {}",tempDate,endDate);
+			 jsonArrayRows.addAll(getTbidListURL2(tempDate.format(formatter),endDate.format(formatter),instNm,bidNm,isExtMatch));
+			 
+		}else
+		{
+			jsonArrayRows = getTbidListURL2(startDate.format(formatter),endDate.format(formatter),instNm,bidNm,isExtMatch);
+		}
+		jsonArrayRows.sort(new Comparator<JSONObject>() {
+	         public int compare(JSONObject a, JSONObject b) {
+		            String str1 = new String();
+		            String str2 = new String();
+		            str1 = (String)a.get("time");
+		            str2 = (String)b.get("time");
+		            return str1.compareTo(str2);
+		         }
+		});
+    	resObj.put("data",jsonArrayRows);	    	    				
+	    return resObj;
+	}
+	
+	public JSONArray getTbidListURL2(String from, String to, String instNm, String bidNm,String isExtMatch)
+	{
+		URIBuilder builder=new URIBuilder();
+		StringBuffer result=new StringBuffer();
+		try {
+			builder = new URIBuilder(tbidListURL);
+			
+			//파라미터 셋팅
+			builder.setParameter("searchType", "1");
+			builder.setParameter("bidSearchType","1");
+			builder.setParameter("bidNm",bidNm);
+			
+			 
+			//기관 셋팅
+			builder.setParameter("radOrgan","2");
+			builder.setParameter("instNm",instNm);
+			
+			//기타
+			builder.setCharset(Charset.forName("EUC-KR"));
+			builder.setParameter("searchDtType", "1");
+			builder.setParameter("fromBidDt",from);
+			builder.setParameter("toBidDt",to);
+			
+			builder.setParameter("budgetCompare","UP");
+			builder.setParameter("regYn","Y");
+			builder.setParameter("recordCountPerPage","500");
+			
+			URI uri=builder.build();		
+			
+			logger.debug("URL Builder String =>> {}.", uri);					
+			result = excuteURL(uri);		
+		
+		} catch (URISyntaxException e) { 
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// HTML 파싱
+		Document doc = Jsoup.parse(result.toString());
+		Elements rows = doc.select("div.results tr");
+		
+		logger.debug("rows.size ====> {}",rows.size());
+					
+		
+		
+		JSONObject resObj = new JSONObject();
+		JSONArray jsonArrayRows = new JSONArray();
+		
+	    for (Element row : rows) {	    	
+	    	//제목	    	
+	    	if (row.getElementsByTag("th").hasText())
+	    	{	    	
+		    	String item3 = row.getElementsByTag("th").get(3).text();		    	
+		    	String item5 = row.getElementsByTag("th").get(5).text();		    	
+		    	String item7 = row.getElementsByTag("th").get(7).text();
+
+	    	}
+	    	
+	    	//만약 내용이 없으면 break;
+	    	
+	    	if (rows.size()==1)
+	    	{		    		
+	    		break; 
+	    		
+	    	}	    		    
+            //내용
+	    	if (row.getElementsByTag("td").hasText())
+	    	{
+	    		if (row.getElementsByTag("td").get(0).text().equals("검색된 데이터가 없습니다."))
+	    		break;	    
+		    	String item3 = row.getElementsByTag("td").get(3).text();		    	
+		    	String item5 = row.getElementsByTag("td").get(5).text();		    	
+		    	String item7 = row.getElementsByTag("td").get(7).text();
+
+		    	
+		    	//json형태
+		    	JSONObject item = new JSONObject();
+		    	item.put("time", item7); //시간
+		    	item.put("name", item3); //공고
+		    	item.put("instNm", item5); //발주처    			    	
+		    	item.put("link",row.select("a").attr("href"));   	
+		    	jsonArrayRows.add(item);	    	
+	    	}
+	    }
+	    return jsonArrayRows;
+	    	
 	}
 
 	public static void main(String[] args)
 	{
 		URLConnection urlc = new URLConnection();
-		urlc.getTbidListURL("2017/09/1","2017/09/01","국립전파연구원","");
-		urlc.getPreStdPublishList("2018/08/1","2018/08/09","대법원","");
+		urlc.getTbidListURL("2017/09/1","2017/09/01","국립전파연구원","","");
+		urlc.getPreStdPublishList("2018/08/1","2018/08/09","대법원","","");
 		
 	}
 }

@@ -13,7 +13,8 @@ Ext.define('Study.view.charts.combination.Dashboard', {
         'Ext.form.Panel',
         'Ext.form.FieldSet',
         'Ext.form.field.Number',
-        'Ext.chart.theme.Blue'
+        'Ext.chart.theme.Blue',
+        'Ext.chart.*'
         
     ],
 

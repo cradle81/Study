@@ -27,6 +27,8 @@ public class MailMonDBManager implements MailMonManagerInterface {
 
 	private HashMap <String, MailMonitorThread> list = new HashMap<String, MailMonitorThread>();
 	private static final Logger logger = LoggerFactory.getLogger(MailMonDBManager.class);
+	
+	
 
  
 	@Override

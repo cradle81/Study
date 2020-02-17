@@ -9,12 +9,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import kr.or.tta.HomeController;
 import kr.or.tta.jungwon.vo.MonInfo;
 
+@Component
 public class MailMonManager implements MailMonManagerInterface{
+	
+	//메모리로 관리
 	static HashMap <String, MailMonitorThread> list = new HashMap<String, MailMonitorThread>();
+
 	private static final Logger logger = LoggerFactory.getLogger(MailMonManager.class);
 	
 	public void add(String threadName, MailMonitorThread t)

@@ -18,10 +18,12 @@ Ext.define('Study.view.selfTest.question.selfTestQuestion', {
 					hidden: true
 		        },
 		        {
-		            title: '현재정보입력(CS)', 
+					title: '현재정보입력(CS)',
+					name : 'CS' ,
 		            xtype : 'INITQeustions'
 		        },{
-		            title: '기술도메인전문성(TD)',
+					title: '기술도메인전문성(TD)',
+					name : 'TD' ,
 		            xtype: 'TDQuestions'		        	
 		        },
 		        {

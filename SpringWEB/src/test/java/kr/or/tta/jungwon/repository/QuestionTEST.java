@@ -30,6 +30,9 @@ public class QuestionTEST extends SpringTestSupport {
 	
 	@Autowired
 	ResultStoreRepository rsRepo;	
+	
+	@Autowired
+	BMTUserRepository bmtUserRepo;
 
 	@Test
 	@Transactional
@@ -41,20 +44,21 @@ public class QuestionTEST extends SpringTestSupport {
 			 System.out.println(tdq.getAnswers());
 		 }*/
 		 
-		 List<PositionWeightVO> pwVO = pwRepo.findAll();
-		 System.out.println(pwVO);
+		 //List<PositionWeightVO> pwVO = pwRepo.findAll();
+		 //System.out.println(pwVO);
 		 
 		 
 		 
 		// RankWeightVO rw = new RankWeightVO("CODE", "TEST", 1,1, 1, 1, 1);
 		// rwRepo.save(rw);
 		 
-		 List<RankWeightVO> rwVO = rwRepo.findAll();
+		// List<RankWeightVO> rwVO = rwRepo.findAll();
 		 
-		 List<WorkTaskWeightVO> wtwVOs = wtwRepo.findAll();
+		// List<WorkTaskWeightVO> wtwVOs = wtwRepo.findAll();
 		 
 		 
-		 List<ResultScoreVO> rsVOs = rsRepo.findAll();
+		// List<ResultScoreVO> rsVOs = rsRepo.findAll();
+		bmtUserRepo.findOne("jungwon_kim");
 	}
 
 }

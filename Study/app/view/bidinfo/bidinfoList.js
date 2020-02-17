@@ -74,8 +74,12 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
             listeners: {                   
                 'keypress': 'keyPress'                    	  	     
                     	   
-                    }	                                                   
-            
+                    }	                                                               
+    	},{
+    	   xtype : 'checkbox', 
+	       boxLabel: '체크시 완전일치',
+           name: 'isExctMatch',
+           inputValue: 'instNmExctMatch'            	
     	},{
     		xtype : 'textfield',
     		name : 'keyword',
@@ -91,7 +95,7 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
             listeners: {                   
                 'keypress': 'keyPress'                    	  	     	                    	   
                     }	
-    		
+    		 
     	}]},{
 		xtype : 'radiogroup',   /////3
 		fieldLabel : '검색유형',
@@ -164,12 +168,12 @@ Ext.define('Study.view.bidinfo.bidinfoList', {
 		       	}],
 		       	bind : {
 		       		store : '{bidinfoList}'		       	   
-		       	},
+		       	}/*,
 		       	bbar :{
 		       		xtype:'pagingtoolbar',
 		       		//plugin : '' 
 		       		displayInfo: true    		
-		       	} 
+		       	} */
 	        },{
 	    	    xtype : 'grid',         /////////// 4-2
 		       	title : '검색기록',

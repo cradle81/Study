@@ -78,7 +78,41 @@ Ext.define('Study.view.selfTest.selfTestController', {
 	        	
 	        })*/
     		
-    	}
+        }
+        var tab = btn.up('tabpanel');
+        console.log(tab);
+        var item = tab.getActiveTab();
+        console.log("Active item",item);
+
+        var xtype = item.getXType();
+        //var name = item.getName();
+        
+        console.log("xtype",xtype);  
+
+        // form에 코드정보 삽입
+        var code=''
+
+        if (xtype == 'INITQeustions'){
+            code = 'INIT';
+        }else  if(xtype =='TDQuestions'){
+            code = 'TD';
+        }
+            
+        var param = form.getValues(true)+ "&CODE="+code;
+        console.log( param ); 
+
+         Ext.Ajax.request({
+            url : Ext.manifest.api_url+'/tta/selftest/sendForm.do',
+            method : 'POST',            
+            params : Ext.JSON.encode(param),
+            success : function(conn,response,options,eOpts){
+                Ext.Msg.alert('결과', '성공');
+            },
+            failure : function(conn,response,options,eOpts){
+                Ext.Msg.alert('실패', conn.responseText);
+            }                        
+        }) 
+    		
 
     },
     onSerachQuestionList : function (btn){

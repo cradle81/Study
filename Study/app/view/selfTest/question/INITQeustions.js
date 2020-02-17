@@ -2,7 +2,8 @@ Ext.define('Study.view.selfTest.question.INITQeustions', {
 	extend: 'Ext.form.Panel',
 	xtype : 'INITQeustions',
 	scrollable: true,
-    controller: 'selfTestController',
+	controller: 'selfTestController',
+	name : 'INIT',
     
    // viewModel: 'questionViewModel', 
     

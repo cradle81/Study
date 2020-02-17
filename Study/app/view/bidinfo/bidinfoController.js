@@ -31,6 +31,7 @@ Ext.define('Study.view.bidinfo.bidinfoController', {
     	var proxy = store.getProxy();    	
     	var radio = me.lookupReference('searchType-ref');
     	
+    	var checkBox = view.down('checkbox');    	
     	
     	
     	var fromDate =  Ext.Date.format(viewModel.get("fromDate"),'Y/m/d');
@@ -39,6 +40,9 @@ Ext.define('Study.view.bidinfo.bidinfoController', {
     	var keyword = viewModel.get("keyword");
     	var endDate = viewModel.get("endDate");
     	var searchType = radio.items.get(0).getGroupValue()
+    	
+    	//var isExtMatch = checkBox.items.get(0).getValue();
+    	//console.log(isExtMatch);
     		
     	
     	//searchViewModel을 찾아보자
@@ -79,6 +83,7 @@ Ext.define('Study.view.bidinfo.bidinfoController', {
     	 else
     	{
     		    proxy.setExtraParam("instNm", viewModel.get("instNm"));
+    		    proxy.setExtraParam("isExctMatch", checkBox.getValue());
     	    	proxy.setExtraParam("keyword", viewModel.get("keyword"));
     	    	proxy.setExtraParam("fromDate", Ext.Date.format(viewModel.get("fromDate"),'Y/m/d'));
     	    	proxy.setExtraParam("toDate", Ext.Date.format(viewModel.get("toDate"),'Y/m/d'));

@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import kr.or.tta.jungwon.dao.MachineDAO;
 import kr.or.tta.jungwon.dao.ScheduleJobDAO;
 import kr.or.tta.jungwon.service.ScheduleJobService;
 import kr.or.tta.jungwon.vo.ScheduleJobVO;

@@ -3,6 +3,9 @@ Ext.define('Study.view.selfTest.result.selfTestResultTable', {
 	xtype : 'selfTestResultTable',
 	title : '교육체게 자가진단결과표',	
     controller: 'selfTestController',
+    requires: [
+        'Ext.chart.*'        
+    ],    
 
     width: 650,
     

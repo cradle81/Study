@@ -21,14 +21,15 @@ public class ScheduleJobDAOImpl implements ScheduleJobDAO {
 	@Override
 	public void insert(ScheduleJobVO job) {
 		// TODO Auto-generated method stub
-		sqlSession.insert(nameSpace+".insertScheduleJob");
+		
+		sqlSession.insert(nameSpace+".insertScheduleJob",job);
 
 	}
 
 	@Override
 	public void delete(String threadName) {
 		// TODO Auto-generated method stub
-		sqlSession.delete(nameSpace+".deleteScheduleJob");
+		sqlSession.delete(nameSpace+".deleteScheduleJob",threadName);
 
 	}
 

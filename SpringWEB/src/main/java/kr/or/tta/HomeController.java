@@ -41,9 +41,12 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	// DB에 스케줄 정보 저장
-	//private MailMonManager mailManger = new MailMonManager();
+	//@Autowired
+	//MailMonDBManager mailManger;
+	
+	// 메모리에 스케줄 정보 저장
 	@Autowired
-	MailMonDBManager mailManger;
+	MailMonManager mailManger;
 	
 	@Autowired
     BMTUserService bmtService;
@@ -79,8 +82,9 @@ public class HomeController {
 		
 		//키워드나, 발주기관  텍스트 필드가 반드시 있어야 한다는 조건이어야 한다. 
 		//extjs에서 해주는 것이 좋다.
-		String from=(String)param.get("fromDate");
+		String from=(String)param.get("fromDate");		
 		String to=(String)param.get("toDate");
+		String isExtMatch=(String)param.get("isExctMatch");
 		String instNm=(String)param.get("instNm");
 		String keyword=(String)param.get("keyword");
 		String type = (String)param.get("searchType");
@@ -89,11 +93,11 @@ public class HomeController {
 		
 		if (type.equals("p"))
 		{
-			resObj = urlc.getPreStdPublishList(from,to,instNm,keyword);	
+			resObj = urlc.getPreStdPublishList(from,to,instNm,keyword,isExctMatch);	
 		}
 		else if (type.equals("t"))
 		{
-			resObj = urlc.getTbidListURL(from,to,instNm,keyword);
+			resObj = urlc.getTbidListURL(from,to,instNm,keyword,isExctMatch);
 		}
 		
 		

@@ -2,6 +2,10 @@ Ext.define('Study.view.selfTest.management.ResultScoreTable',{
     extend : 'Ext.panel.Panel',
     xtype : 'resultScoreTable',
     controller : 'selfTestController',
+    requires: [
+        'Ext.chart.*'        
+    ],    
+    
     layout : {
         type : 'hbox',
         pack : 'start',

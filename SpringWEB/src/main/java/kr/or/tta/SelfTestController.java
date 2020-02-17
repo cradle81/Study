@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -209,12 +212,33 @@ public class SelfTestController {
 					
 		return resObj;
 	}	
-	//http://localhost:8080/tta/bidinfo/selftest/getSTQuestion.do
-	@RequestMapping(value = "sendForm.do", method = RequestMethod.POST)
-	public void submitSTFrom(@RequestBody Map<String, Object> params, Locale locale)
-	{
-	
-		logger.info(params.toString()); 
+	//http://localhost:8080/tta/selftest/sendForm.do
+	@RequestMapping(value = "/sendForm.do", method = RequestMethod.POST)
+	public @ResponseBody JSONObject submitForm(@RequestParam(required = true) Map params, HttpServletRequest request)
+	{	
+		logger.info(params.toString());  
+		
+		HttpSession ss = request.getSession();
+		
+		ss.setAttribute("INIT", params.toString());
+		logger.info(ss.getId());
+		
+		JSONObject resObj = new JSONObject();	
+		resObj.put("result", "Success");
+		return resObj;
 	}		
-	
+	@RequestMapping(value = "/checkProccess.do", method = RequestMethod.GET)
+	public @ResponseBody JSONObject checkProccess(HttpServletRequest request) 
+	{	
+		 
+		
+		HttpSession ss = request.getSession();
+		
+		Object ob = ss.getAttribute("INIT");
+		logger.info(ob.toString());
+		
+		JSONObject resObj = new JSONObject();	
+		resObj.put("result", "Success");
+		return resObj;
+	}		
 }
